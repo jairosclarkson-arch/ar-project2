@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolyWorld AR Experience</title>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      max-width: 320px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: #22c55e;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #16a34a;
+    }
+
+    /* AR VIEW (hidden at start) */
+    #arView {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    model-viewer {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* Back button */
+    .backBtn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 10;
+      padding: 10px 14px;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 🔵 HOME PAGE -->
+<div id="home">
+  <div class="card">
+    <h1>🌍 PolyWorld AR</h1>
+    <p>Tap below to view your 3D model in augmented reality</p>
+    <button class="btn" onclick="openAR()">▶ Enter AR Experience</button>
+  </div>
+</div>
+
+<!-- 🟢 AR VIEW -->
+<div id="arView">
+  <button class="backBtn" onclick="goHome()">← Back</button>
+
+  <model-viewer
+    src="https://raw.githubusercontent.com/jairosclarkson-arch/ar-project/main/maria.glb"
+    ar
+    ar-modes="scene-viewer webxr quick-look"
+    camera-controls
+    auto-rotate>
+  </model-viewer>
+</div>
+
+<script>
+  function openAR() {
+    document.getElementById("home").style.display = "none";
+    document.getElementById("arView").style.display = "block";
+  }
+
+  function goHome() {
+    document.getElementById("arView").style.display = "none";
+    document.getElementById("home").style.display = "flex";
+  }
+</script>
+
+</body>
+</html>
